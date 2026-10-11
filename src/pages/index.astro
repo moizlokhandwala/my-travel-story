@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Cover from '../components/Cover.astro';
 import TripCard from '../components/TripCard.astro';
-import { SITE, withBase } from '../config';
+import { SITE, STATUS_BADGE, tripPlace, withBase } from '../config';
 
 // Newest trip first.
 const trips = (await getCollection('trips')).sort((a, b) => b.data.order - a.data.order);
@@ -31,10 +31,10 @@ const countries = new Set(trips.map((t) => t.data.country)).size;
           <a class="featured" href={withBase(`trips/${latest.id}/`)} style={`--accent: ${latest.data.accent}`}>
             <Cover trip={latest} width={1000} loading="eager" />
             <div class="featured-body">
-              <p class="eyebrow">{[latest.data.country, latest.data.when].filter(Boolean).join(' · ')}</p>
+              {tripPlace(latest.data) && <p class="eyebrow">{tripPlace(latest.data)}</p>}
               <h3>{latest.data.title}</h3>
               <p>{latest.data.summary}</p>
-              {latest.data.status === 'draft' && <span class="badge">Story coming soon</span>}
+              {latest.data.status !== 'published' && <span class="badge">{STATUS_BADGE[latest.data.status]}</span>}
             </div>
           </a>
         </section>

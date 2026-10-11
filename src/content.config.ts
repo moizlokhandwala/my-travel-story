@@ -14,7 +14,8 @@ const trips = defineCollection({
       when: z.string().optional(), // free text: "March 2023", "Summer 2024"
       duration: z.string().optional(), // "7 days"
       summary: z.string(), // one or two sentences, shown on cards
-      status: z.enum(['draft', 'published']).default('draft'), // draft = "story coming soon"
+      // draft = "story coming soon", in-progress = some days written, published = finished
+      status: z.enum(['draft', 'in-progress', 'published']).default('draft'),
       accent: z.string().default('#0ea5e9'), // colour used for this trip's cover and highlights (sky blue or a green suits the theme)
       cover: image().optional(),
       coverAlt: z.string().optional(),

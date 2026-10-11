@@ -10,7 +10,7 @@ order: 6 # next number after your most recent trip
 when: April 2027 # optional, free text
 duration: 10 days # optional
 summary: One or two sentences that appear on the trip card.
-status: published # use "draft" to show a "story coming soon" card
+status: published # "draft" = story coming soon, "in-progress" = some days written, "published" = finished
 accent: '#0ea5e9' # colour for this trip's cover; stay with sky blue or a green to match the theme
 
 # Optional cover photo: put the file in src/assets/trips/japan/ and point to it here.

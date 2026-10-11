@@ -23,7 +23,8 @@ interface Props {
 const { trip, prev, next } = Astro.props;
 const { Content } = await render(trip);
 const { title, country, region, when, duration, summary, status, accent, highlights, gallery } = trip.data;
-const meta = [country, region, when, duration].filter(Boolean);
+// Skip the country when it just repeats the trip title (e.g. "Georgia" in "Georgia").
+const meta = [country === title ? undefined : country, region, when, duration].filter(Boolean);
 ---
 
 <Base title={title} description={summary}>
@@ -44,6 +45,12 @@ const meta = [country, region, when, duration].filter(Boolean);
       {
         status === 'draft' && (
           <p class="notice">This story is still being written. Check back soon.</p>
+        )
+      }
+
+      {
+        status === 'in-progress' && (
+          <p class="notice">This story is still being written. More days are coming soon.</p>
         )
       }
 

@@ -22,7 +22,8 @@ npm run build    # production build into dist/
    (see the commented examples in the template). Astro resizes and compresses them automatically.
 4. Commit and push to `main`. The site updates in a minute or two.
 
-Set `status: draft` while a story is unfinished to show a "story coming soon" card.
+Use `status: draft` for a trip with no story yet ("story coming soon"), `status: in-progress` while you
+are still adding days ("story in progress"), and `status: published` once it is finished.
 
 ## Where things live
 
