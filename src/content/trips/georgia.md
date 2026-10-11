@@ -4,7 +4,7 @@ country: Georgia
 order: 1
 summary: Our trip to Georgia. The full story is on its way.
 status: draft
-accent: '#9f1239'
+accent: '#16a34a'
 ---
 
 The full story of our trip to Georgia is coming soon.

@@ -15,8 +15,7 @@ const countries = new Set(trips.map((t) => t.data.country)).size;
   <div class="wrap">
     <section class="hero">
       <p class="eyebrow">Travel journal</p>
-      <h1>{SITE.title}</h1>
-      <p class="lead">{SITE.tagline}</p>
+      <h1>{SITE.tagline}</h1>
       <ul class="stats" aria-label="Travel totals">
         <li><strong>{trips.length}</strong><span>trips</span></li>
         <li><strong>{countries}</strong><span>{countries === 1 ? 'country' : 'countries'}</span></li>

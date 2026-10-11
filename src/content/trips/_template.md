@@ -11,7 +11,7 @@ when: April 2027 # optional, free text
 duration: 10 days # optional
 summary: One or two sentences that appear on the trip card.
 status: published # use "draft" to show a "story coming soon" card
-accent: '#b45309' # colour for this trip's cover and highlights
+accent: '#0ea5e9' # colour for this trip's cover; stay with sky blue or a green to match the theme
 
 # Optional cover photo: put the file in src/assets/trips/japan/ and point to it here.
 # cover: ../../assets/trips/japan/cover.jpg
