@@ -170,12 +170,13 @@ h3 {
 /* ---------- Home ---------- */
 
 .hero {
-  padding-block: clamp(3rem, 9vw, 6.5rem) clamp(2rem, 5vw, 3.5rem);
+  padding-block: clamp(1.5rem, 4vw, 2.5rem) 0.25rem;
 }
 
 .hero h1 {
-  font-size: clamp(2.2rem, 6vw, 3.9rem);
-  max-width: 20ch;
+  font-size: clamp(1.5rem, 3.6vw, 2.25rem);
+  max-width: 40ch;
+  margin-bottom: 0.25em;
 }
 
 .hero p.lead {
@@ -189,22 +190,29 @@ h3 {
   color: var(--green-strong);
 }
 
+/* Compact one-line counters: "5 trips  5 countries" */
 .stats {
   display: flex;
-  gap: 2.5rem;
-  margin-top: 2rem;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+  margin: 0.5rem 0 0;
   padding: 0;
   list-style: none;
 }
 
+.stats li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
 .stats strong {
-  display: block;
-  font: 700 2rem/1 var(--serif);
+  font: 700 1.35rem/1 var(--serif);
   color: var(--green-strong);
 }
 
 .stats span {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--muted);
 }
 
@@ -213,7 +221,7 @@ h3 {
   align-items: baseline;
   justify-content: space-between;
   gap: 1rem;
-  margin: 3rem 0 1.25rem;
+  margin: 1.75rem 0 1rem;
 }
 
 .section-head h2 {
