@@ -1,0 +1,23 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Cover from './Cover.astro';
+import { withBase } from '../config';
+
+interface Props {
+  trip: CollectionEntry<'trips'>;
+}
+
+const { trip } = Astro.props;
+const { title, country, when, summary, status, accent } = trip.data;
+const place = [country, when].filter(Boolean).join(' · ');
+---
+
+<a class="card" href={withBase(`trips/${trip.id}/`)} style={`--accent: ${accent}`}>
+  <Cover trip={trip} width={600} />
+  <div class="card-body">
+    <p class="eyebrow">{place}</p>
+    <h3>{title}</h3>
+    <p>{summary}</p>
+    {status === 'draft' && <p style="margin-top: 0.75rem"><span class="badge">Story coming soon</span></p>}
+  </div>
+</a>

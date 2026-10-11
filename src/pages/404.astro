@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import { withBase } from '../config';
+---
+
+<Base title="Page not found">
+  <div class="wrap">
+    <section class="hero">
+      <p class="eyebrow">404</p>
+      <h1>Lost on the road</h1>
+      <p class="lead">We could not find that page. <a href={withBase()}>Head back to the trips</a>.</p>
+    </section>
+  </div>
+</Base>

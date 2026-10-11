@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { SITE } from '../config';
+
+const trips = await getCollection('trips');
+const countries = new Set(trips.map((t) => t.data.country)).size;
+---
+
+<Base title="About" description={SITE.description}>
+  <div class="wrap">
+    <section class="hero">
+      <p class="eyebrow">About</p>
+      <h1>About this journal</h1>
+      <p class="lead">
+        A growing record of our travels: {trips.length} trips across {countries} countries so far, with more to come.
+      </p>
+    </section>
+    <div class="prose" style="margin-top: 0">
+      <p>
+        We started this site to keep the stories, photos and practical tips from every trip in one place, so we can
+        look back on them and share them with friends who are planning their own adventures.
+      </p>
+      <p>Each trip has its own page with the story, highlights, tips and photos.</p>
+    </div>
+  </div>
+</Base>

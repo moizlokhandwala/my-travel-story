@@ -1,0 +1,97 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Cover from '../../components/Cover.astro';
+import { withBase } from '../../config';
+
+export async function getStaticPaths() {
+  const trips = (await getCollection('trips')).sort((a, b) => a.data.order - b.data.order);
+  return trips.map((trip, i) => ({
+    params: { id: trip.id },
+    props: { trip, prev: trips[i - 1], next: trips[i + 1] },
+  }));
+}
+
+interface Props {
+  trip: CollectionEntry<'trips'>;
+  prev?: CollectionEntry<'trips'>;
+  next?: CollectionEntry<'trips'>;
+}
+
+const { trip, prev, next } = Astro.props;
+const { Content } = await render(trip);
+const { title, country, region, when, duration, summary, status, accent, highlights, gallery } = trip.data;
+const meta = [country, region, when, duration].filter(Boolean);
+---
+
+<Base title={title} description={summary}>
+  <article style={`--accent: ${accent}`}>
+    <div class="wrap">
+      <div class="trip-hero">
+        <Cover trip={trip} width={1400} loading="eager" />
+        <header class="trip-title">
+          <h1>{title}</h1>
+          <ul class="meta">
+            {meta.map((m) => <li>{m}</li>)}
+          </ul>
+        </header>
+      </div>
+
+      <p class="lead" style="margin-top: 1.5rem">{summary}</p>
+
+      {
+        status === 'draft' && (
+          <p class="notice">This story is still being written. Check back soon.</p>
+        )
+      }
+
+      {
+        highlights.length > 0 && (
+          <ul class="highlights" aria-label="Highlights">
+            {highlights.map((h) => <li>{h}</li>)}
+          </ul>
+        )
+      }
+
+      <div class="prose">
+        <Content />
+      </div>
+
+      {
+        gallery.length > 0 && (
+          <section class="gallery" aria-label="Photo gallery">
+            {gallery.map((photo) => (
+              <figure>
+                <a href={photo.src.src} target="_blank" rel="noopener">
+                  <Image src={photo.src} alt={photo.alt} width={800} loading="lazy" />
+                </a>
+                {photo.caption && <figcaption>{photo.caption}</figcaption>}
+              </figure>
+            ))}
+          </section>
+        )
+      }
+
+      <nav class="pager" aria-label="More trips">
+        {
+          prev && (
+            <a class="prev" href={withBase(`trips/${prev.id}/`)}>
+              <small>← Previous trip</small>
+              {prev.data.title}
+            </a>
+          )
+        }
+        {
+          next && (
+            <a class="next" href={withBase(`trips/${next.id}/`)}>
+              <small>Next trip →</small>
+              {next.data.title}
+            </a>
+          )
+        }
+      </nav>
+    </div>
+  </article>
+</Base>

@@ -1,0 +1,26 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  trip: CollectionEntry<'trips'>;
+  // Width hint for the optimised image, in CSS pixels.
+  width?: number;
+  loading?: 'lazy' | 'eager';
+}
+
+const { trip, width = 900, loading = 'lazy' } = Astro.props;
+const { cover, coverAlt, title, accent } = trip.data;
+---
+
+<div class="cover" style={`--accent: ${accent}`}>
+  {
+    cover ? (
+      <Image src={cover} alt={coverAlt ?? `${title}`} width={width} loading={loading} />
+    ) : (
+      <span class="cover-label" aria-hidden="true">
+        {title}
+      </span>
+    )
+  }
+</div>

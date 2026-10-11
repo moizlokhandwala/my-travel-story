@@ -1,0 +1,45 @@
+---
+import '../styles/global.css';
+import { SITE, withBase } from '../config';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description = SITE.description } = Astro.props;
+const fullTitle = title ? `${title} · ${SITE.title}` : SITE.title;
+const path = Astro.url.pathname;
+const isActive = (href: string) => path.startsWith(href);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href={withBase()}>{SITE.title}</a>
+        <nav class="nav" aria-label="Main">
+          <a href={withBase()} aria-current={path === withBase() ? 'page' : undefined}>Trips</a>
+          <a href={withBase('about/')} aria-current={isActive(withBase('about/')) ? 'page' : undefined}>About</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">© {new Date().getFullYear()} {SITE.title}</div>
+    </footer>
+  </body>
+</html>

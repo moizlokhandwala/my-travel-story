@@ -1,0 +1,62 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Cover from '../components/Cover.astro';
+import TripCard from '../components/TripCard.astro';
+import { SITE, withBase } from '../config';
+
+// Newest trip first.
+const trips = (await getCollection('trips')).sort((a, b) => b.data.order - a.data.order);
+const [latest, ...earlier] = trips;
+const countries = new Set(trips.map((t) => t.data.country)).size;
+---
+
+<Base>
+  <div class="wrap">
+    <section class="hero">
+      <p class="eyebrow">Travel journal</p>
+      <h1>{SITE.title}</h1>
+      <p class="lead">{SITE.tagline}</p>
+      <ul class="stats" aria-label="Travel totals">
+        <li><strong>{trips.length}</strong><span>trips</span></li>
+        <li><strong>{countries}</strong><span>{countries === 1 ? 'country' : 'countries'}</span></li>
+      </ul>
+    </section>
+
+    {
+      latest && (
+        <section aria-labelledby="latest-h">
+          <div class="section-head">
+            <h2 id="latest-h">Latest trip</h2>
+          </div>
+          <a class="featured" href={withBase(`trips/${latest.id}/`)} style={`--accent: ${latest.data.accent}`}>
+            <Cover trip={latest} width={1000} loading="eager" />
+            <div class="featured-body">
+              <p class="eyebrow">{[latest.data.country, latest.data.when].filter(Boolean).join(' · ')}</p>
+              <h3>{latest.data.title}</h3>
+              <p>{latest.data.summary}</p>
+              {latest.data.status === 'draft' && <span class="badge">Story coming soon</span>}
+            </div>
+          </a>
+        </section>
+      )
+    }
+
+    {
+      earlier.length > 0 && (
+        <section aria-labelledby="earlier-h">
+          <div class="section-head">
+            <h2 id="earlier-h">Earlier trips</h2>
+          </div>
+          <ul class="grid">
+            {earlier.map((trip) => (
+              <li>
+                <TripCard trip={trip} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+  </div>
+</Base>
