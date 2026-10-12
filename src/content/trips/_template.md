@@ -11,7 +11,7 @@ when: April 2027 # optional, free text
 duration: 10 days # optional
 summary: One or two sentences that appear on the trip card.
 status: published # "draft" = story coming soon, "in-progress" = some days written, "published" = finished
-accent: '#0ea5e9' # colour for this trip's cover; stay with sky blue or a green to match the theme
+accent: '#0ea5e9' # colour for this trip's cover; pick a shade of sky blue to match the theme
 
 # Optional cover photo: put the file in src/assets/trips/japan/ and point to it here.
 # cover: ../../assets/trips/japan/cover.jpg

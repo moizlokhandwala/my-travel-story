@@ -5,7 +5,7 @@ region: Kerala
 order: 4
 summary: Our trip to Munnar. The full story is on its way.
 status: draft
-accent: '#059669'
+accent: '#3b82f6'
 ---
 
 The full story of our trip to Munnar is coming soon.

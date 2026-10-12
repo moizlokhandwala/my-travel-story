@@ -16,7 +16,7 @@ const trips = defineCollection({
       summary: z.string(), // one or two sentences, shown on cards
       // draft = "story coming soon", in-progress = some days written, published = finished
       status: z.enum(['draft', 'in-progress', 'published']).default('draft'),
-      accent: z.string().default('#0ea5e9'), // colour used for this trip's cover and highlights (sky blue or a green suits the theme)
+      accent: z.string().default('#0ea5e9'), // colour used for this trip's cover and highlights (a shade of sky blue suits the theme)
       cover: image().optional(),
       coverAlt: z.string().optional(),
       highlights: z.array(z.string()).default([]),
